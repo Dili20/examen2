@@ -1,7 +1,15 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\ListaController;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', fn() => auth()->check() ? redirect()->route('listas.index') : view('login'))->name('login');
+Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
+Route::post('/logout', [GoogleController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('listas', ListaController::class)->except('show');
 });
+
+// partw B
