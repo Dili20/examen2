@@ -17,7 +17,7 @@
 </head>
 <body>
     <h1>{{ $lista->titulo }}</h1>
-    <p class="meta">Creada por: <strong>{{ $lista->creador }}</strong></p>
+    <p class="meta">Creada por: <strong>{{ $creador }}</strong></p>
 
     <div>
         <span id="texto-progreso">{{ $completados }} de {{ $total }} completados ({{ $porcentaje }}%)</span>
@@ -51,7 +51,7 @@
 
     <script>
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const toggleUrlBase = "{{ url('/lista/' . $lista->token . '/item') }}";
+        const toggleUrlBase = "{{ url('/' . $lista->token . '/item') }}";
 
         document.querySelectorAll('.check-item').forEach((checkbox) => {
             checkbox.addEventListener('change', async function () {
@@ -87,8 +87,8 @@
 
                     document.getElementById('barra-progreso').style.width = `${data.porcentaje}%`;
 
-                    const msgExito = document.getElementById('mensaje-completado');
-                    msgExito.style.display = data.todo_completado ? 'block' : 'none';
+                    document.getElementById('mensaje-completado').style.display =
+                        data.todo_completado ? 'block' : 'none';
                 } catch (err) {
                     this.checked = prevChecked;
                     alert('Error al guardar el cambio. Intenta de nuevo.');
