@@ -12,4 +12,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('listas', ListaController::class)->except('show');
 });
 
+use App\Http\Controllers\ControllerVisitantes;
+
+Route::get('/lista/{token}', [ControllerVisitantes::class, 'verLista'])->name('lista.publica');
+Route::post('/lista/{token}/item/{item}/toggle', [ControllerVisitantes::class, 'toggleItem'])->name('lista.item.toggle');
 // partw B
