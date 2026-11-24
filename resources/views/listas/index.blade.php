@@ -16,7 +16,12 @@
       <td>{{ $l->titulo }}</td>
       <td><input class="form-control form-control-sm" value="{{ $l->token }}" readonly></td>
       <td>
-        {{-- Botones del Estudiante B aquí --}}
+        <a href="{{ route('lista.publica', $l->token) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+          Ver pública
+        </a>
+        <a href="https://wa.me/?text={{ urlencode('Mira esta lista (' . $l->titulo . '): ' . route('lista.publica', $l->token)) }}" target="_blank" class="btn btn-sm btn-success">
+          Compartir
+        </a>
         <a href="{{ route('listas.edit', $l) }}" class="btn btn-sm btn-outline-dark"><i class="bi bi-pencil-fill"></i></a>
         <form action="{{ route('listas.destroy', $l) }}" method="POST" class="d-inline"
               onsubmit="return confirm('¿Eliminar esta lista?')">

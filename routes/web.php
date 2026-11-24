@@ -14,6 +14,6 @@ Route::middleware('auth')->group(function () {
 
 use App\Http\Controllers\ControllerVisitantes;
 
+// partw B
 Route::get('/lista/{token}', [ControllerVisitantes::class, 'verLista'])->name('lista.publica');
 Route::post('/lista/{token}/item/{item}/toggle', [ControllerVisitantes::class, 'toggleItem'])->name('lista.item.toggle');
-// partw B
